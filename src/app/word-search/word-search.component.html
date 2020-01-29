@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>Word Search</mat-card-title>
+  <mat-card-content>
+    <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
+    <br />
+    <app-guess-word
+      [words]="wordsToSearch"
+      (addWord)="addWord($event)"
+    ></app-guess-word>
+  </mat-card-content>
+</mat-card>

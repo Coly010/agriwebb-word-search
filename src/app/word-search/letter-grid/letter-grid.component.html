@@ -1,0 +1,17 @@
+<mat-form-field>
+  <textarea
+    matInput
+    cdkTextareaAutosize
+    [formControl]="grid"
+    placeholder="Word Search Grid"
+    class="letter-grid"
+    spellcheck="false"
+    (keydown)="handleGridChange($event)"
+  ></textarea>
+  <mat-error *ngIf="grid.hasError('notSquare')">
+    Please ensure you have the same number of rows and columns
+  </mat-error>
+  <mat-error *ngIf="grid.hasError('incomplete')">
+    Please ensure all your rows have the same number of columns
+  </mat-error>
+</mat-form-field>
