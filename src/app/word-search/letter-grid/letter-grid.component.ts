@@ -1,7 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { tap, map } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-letter-grid',
   templateUrl: './letter-grid.component.html',
@@ -13,7 +15,13 @@ export class LetterGridComponent implements OnInit {
   grid: FormControl;
   letterGrid: string[][] = [[]];
 
-  errors = () => JSON.stringify(this.grid.errors);
+  hasGridError = {
+    isErrorState: () => {
+      return (
+        this.grid.hasError('notSquare') || this.grid.hasError('incomplete')
+      );
+    }
+  };
 
   constructor() {}
 
@@ -24,6 +32,7 @@ export class LetterGridComponent implements OnInit {
 
     this.grid.valueChanges
       .pipe(
+        untilDestroyed(this),
         tap(() => {
           this.grid.setErrors(null);
         }),

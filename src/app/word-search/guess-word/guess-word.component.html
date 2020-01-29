@@ -8,6 +8,9 @@
       (keydown.enter)="addWordToSearch()"
       placeholder="Word to search for"
     />
+    <mat-error *ngIf="wordInput.hasError('empty')">
+      Please enter a word
+    </mat-error>
   </mat-form-field>
   <button
     class="h-50 my-auto"

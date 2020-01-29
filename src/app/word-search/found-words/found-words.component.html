@@ -3,8 +3,11 @@
   <div class="col mat-h2">Start</div>
   <div class="col mat-h2">End</div>
 </div>
-<div class="row found-words">
-  <div class="col"></div>
-  <div class="col"></div>
-  <div class="col"></div>
+<div
+  *ngFor="let word of wordsFound; trackBy: wordTrackByFn"
+  class="row found-words text-center"
+>
+  <div class="col">{{ word.word }}</div>
+  <div class="col">{{ word.startPoint }}</div>
+  <div class="col">{{ word.endPoint }}</div>
 </div>

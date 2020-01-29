@@ -1,26 +1,55 @@
-<mat-card>
-  <mat-card-title>Word Search</mat-card-title>
-  <mat-card-content>
-    <div class="d-flex flex-row">
-      <div class="d-flex flex-column w-50 mr-2 pr-4">
-        <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
-        <app-guess-word
-          [words]="wordsToSearch"
-          (addWord)="addWord($event)"
-          (removeWord)="removeWord($event)"
-        ></app-guess-word>
-        <button
-          mat-flat-button
-          color="primary"
-          class="w-50 mx-auto"
-          (click)="solve()"
-        >
-          Solve Puzzle
-        </button>
+<div class="w-100 d-flex flex-column pt-5">
+  <mat-card class="w-75 mx-auto  word-search">
+    <mat-card-title>Word Search</mat-card-title>
+    <mat-card-content>
+      <div class="d-none d-md-block">
+        <div class="d-flex flex-row">
+          <div class="d-flex flex-column w-50 mr-2 pr-4">
+            <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
+            <app-guess-word
+              [words]="wordsToSearch"
+              (addWord)="addWord($event)"
+              (removeWord)="removeWord($event)"
+            ></app-guess-word>
+            <button
+              mat-flat-button
+              color="primary"
+              class="w-50 mx-auto"
+              (click)="solve()"
+            >
+              Solve Puzzle
+            </button>
+          </div>
+          <div class="w-50 ml-2 pl-4">
+            <app-found-words [wordsFound]="wordsFound"></app-found-words>
+          </div>
+        </div>
       </div>
-      <div class="w-50 ml-2 pl-4">
-        <app-found-words></app-found-words>
+
+      <div class="d-block d-md-none">
+        <div class="d-flex flex-column">
+          <div class="d-flex flex-column">
+            <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
+            <app-guess-word
+              [words]="wordsToSearch"
+              (addWord)="addWord($event)"
+              (removeWord)="removeWord($event)"
+            ></app-guess-word>
+            <button
+              mat-flat-button
+              color="primary"
+              class="w-50 mx-auto"
+              (click)="solve()"
+            >
+              Solve Puzzle
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="wordsFound" class="d-block d-md-none mt-5 w-75 mx-auto">
+    <app-found-words [wordsFound]="wordsFound"></app-found-words>
+  </mat-card>
+</div>

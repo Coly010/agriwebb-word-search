@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FoundWord } from './../models/word-search.model';
 
 @Component({
   selector: 'app-found-words',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./found-words.component.scss']
 })
 export class FoundWordsComponent implements OnInit {
+  @Input() wordsFound: FoundWord[];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  wordTrackByFn(index: number, item: FoundWord) {
+    return index;
   }
-
 }

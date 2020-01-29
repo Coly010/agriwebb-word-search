@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { tap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-guess-word',
   templateUrl: './guess-word.component.html',
@@ -17,6 +20,13 @@ export class GuessWordComponent implements OnInit {
 
   ngOnInit() {
     this.wordInput = new FormControl('');
+    this.wordInput.valueChanges
+      .pipe(
+        untilDestroyed(this),
+        tap(value => this.wordInput.setErrors(null)),
+        tap(value => this.checkEmptyWord(value))
+      )
+      .subscribe();
   }
 
   preventSpace(event: KeyboardEvent) {
@@ -24,6 +34,16 @@ export class GuessWordComponent implements OnInit {
   }
 
   addWordToSearch() {
+    this.checkEmptyWord(this.wordInput.value);
+
+    if (
+      this.wordInput.invalid ||
+      this.wordInput.value === '' ||
+      this.wordInput.value === null
+    ) {
+      return;
+    }
+
     this.addWord.emit(this.wordInput.value);
     this.wordInput.reset();
   }
@@ -33,5 +53,17 @@ export class GuessWordComponent implements OnInit {
 
   wordTrackFn(index: number, item: string) {
     return index;
+  }
+
+  private checkEmptyWord(value: string) {
+    if (
+      this.wordInput.dirty &&
+      (value === null || value.replace(/\s/g, '') === '')
+    ) {
+      this.wordInput.setErrors({
+        ...this.wordInput.errors,
+        empty: true
+      });
+    }
   }
 }
