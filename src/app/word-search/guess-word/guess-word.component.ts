@@ -47,6 +47,7 @@ export class GuessWordComponent implements OnInit {
     this.addWord.emit(this.wordInput.value);
     this.wordInput.reset();
   }
+
   removeWordToSearch(word: string) {
     this.removeWord.emit(word);
   }

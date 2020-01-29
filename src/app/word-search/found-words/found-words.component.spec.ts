@@ -1,25 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { FoundWordsComponent } from './found-words.component';
 
 describe('FoundWordsComponent', () => {
-  let component: FoundWordsComponent;
-  let fixture: ComponentFixture<FoundWordsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FoundWordsComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FoundWordsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  let spectator: Spectator<FoundWordsComponent>;
+  const createComponent = createComponentFactory({
+    component: FoundWordsComponent,
+    shallow: true
   });
 
+  beforeEach(() => (spectator = createComponent()));
+
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
   });
 });

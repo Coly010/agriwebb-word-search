@@ -62,7 +62,7 @@ export class WordSearchService {
               foundWord = {
                 ...foundWord,
                 startPoint: `(${i + 1}, ${j + 1})`,
-                endPoint: `(${i + 1}, ${j - term.length + 1})`,
+                endPoint: `(${i + 1}, ${j + 1 - (term.length - 1)})`,
                 direction: 'up'
               };
               this.upsertFoundWord(foundWords, foundWord);
