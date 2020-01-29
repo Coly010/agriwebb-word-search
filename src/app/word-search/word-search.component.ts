@@ -20,4 +20,10 @@ export class WordSearchComponent implements OnInit {
   addWord(word: string) {
     this.wordsToSearch.push(word);
   }
+
+  removeWord(word: string) {
+    this.wordsToSearch = this.wordsToSearch.filter(w => w !== word);
+  }
+
+  solve() {}
 }

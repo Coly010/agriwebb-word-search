@@ -1,11 +1,26 @@
 <mat-card>
   <mat-card-title>Word Search</mat-card-title>
   <mat-card-content>
-    <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
-    <br />
-    <app-guess-word
-      [words]="wordsToSearch"
-      (addWord)="addWord($event)"
-    ></app-guess-word>
+    <div class="d-flex flex-row">
+      <div class="d-flex flex-column w-50 mr-2 pr-4">
+        <app-letter-grid (updateGrid)="setGrid($event)"></app-letter-grid>
+        <app-guess-word
+          [words]="wordsToSearch"
+          (addWord)="addWord($event)"
+          (removeWord)="removeWord($event)"
+        ></app-guess-word>
+        <button
+          mat-flat-button
+          color="primary"
+          class="w-50 mx-auto"
+          (click)="solve()"
+        >
+          Solve Puzzle
+        </button>
+      </div>
+      <div class="w-50 ml-2 pl-4">
+        <app-found-words></app-found-words>
+      </div>
+    </div>
   </mat-card-content>
 </mat-card>

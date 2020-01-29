@@ -1,19 +1,31 @@
-<mat-form-field>
-  <input
-    matInput
-    [formControl]="wordInput"
-    type="text"
-    (keydown.space)="preventSpace($event)"
-    placeholder="Word to search for"
-  />
-</mat-form-field>
-<button mat-flat-button color="primary" (click)="addWordToSearch()">
-  Add
-</button>
-<div class="wordsToSearchArea">
-  <div *ngFor="let word of words; let i = index; trackBy: wordTrackFn">
+<div class="d-flex w-100 justify-content-between">
+  <mat-form-field class="w-75">
+    <input
+      matInput
+      type="text"
+      [formControl]="wordInput"
+      (keydown.space)="preventSpace($event)"
+      (keydown.enter)="addWordToSearch()"
+      placeholder="Word to search for"
+    />
+  </mat-form-field>
+  <button
+    class="h-50 my-auto"
+    mat-flat-button
+    color="primary"
+    (click)="addWordToSearch()"
+  >
+    Add
+  </button>
+</div>
+
+<div class="wordsToSearchArea w-100 mt-4">
+  <div
+    *ngFor="let word of words; trackBy: wordTrackFn"
+    class="d-flex justify-content-between"
+  >
     {{ word }}
-    <button mat-icon-button color="warn" (click)="removeWordToSearch(i)">
+    <button mat-icon-button color="warn" (click)="removeWordToSearch(word)">
       <mat-icon>close</mat-icon>
     </button>
   </div>

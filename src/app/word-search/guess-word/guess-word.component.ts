@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 export class GuessWordComponent implements OnInit {
   @Input() words: string[];
   @Output() readonly addWord = new EventEmitter<string>();
+  @Output() readonly removeWord = new EventEmitter<string>();
 
   wordInput: FormControl;
 
@@ -26,7 +27,9 @@ export class GuessWordComponent implements OnInit {
     this.addWord.emit(this.wordInput.value);
     this.wordInput.reset();
   }
-  removeWordToSearch(wordIndex: number) {}
+  removeWordToSearch(word: string) {
+    this.removeWord.emit(word);
+  }
 
   wordTrackFn(index: number, item: string) {
     return index;
