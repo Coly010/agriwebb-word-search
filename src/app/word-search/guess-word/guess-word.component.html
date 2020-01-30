@@ -7,6 +7,7 @@
       (keydown.space)="preventSpace($event)"
       (keydown.enter)="addWordToSearch()"
       placeholder="Word to search for"
+      data-cy="input-word-guess"
     />
     <mat-error *ngIf="wordInput.hasError('empty')">
       Please enter a word
@@ -17,12 +18,13 @@
     mat-flat-button
     color="primary"
     (click)="addWordToSearch()"
+    data-cy="button-add-word"
   >
     Add
   </button>
 </div>
 
-<div class="wordsToSearchArea w-100 mt-4">
+<div class="wordsToSearchArea w-100 mt-4" data-cy="div-words-to-search">
   <div
     *ngFor="let word of words; trackBy: wordTrackFn"
     class="d-flex justify-content-between"

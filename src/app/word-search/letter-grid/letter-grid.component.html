@@ -6,6 +6,7 @@
     [errorStateMatcher]="hasGridError"
     placeholder="Word Search Grid"
     class="letter-grid w-100"
+    data-cy="input-letter-grid"
     spellcheck="false"
     (keydown)="handleGridChange($event)"
   ></textarea>

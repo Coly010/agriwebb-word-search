@@ -6,6 +6,7 @@
 <div
   *ngFor="let word of wordsFound; trackBy: wordTrackByFn"
   class="row found-words text-center"
+  [attr.data-cy]="'found-word-' + word.word"
 >
   <div class="col">{{ word.word }}</div>
   <div class="col">{{ word.startPoint }}</div>
